@@ -15,6 +15,10 @@ function LoginPage() {
     setPassword(event.currentTarget.value)
 
   }
+  const onSubmitHandler = (event) => {
+    setPassword(event.currentTarget.value)
+
+  }
 
 
   return (
@@ -25,7 +29,9 @@ function LoginPage() {
 
       <form style={{
       display: 'flex', flexDirection: "column"
-    }}>
+    }}
+    
+    onSubmit={onSubmitHandler}>
         <label>Email</label>
         <input type="email" value={Email} onChange={onEmailHandler} />
         <label>Password</label>
@@ -33,7 +39,7 @@ function LoginPage() {
 
         <br />
 
-        <button>
+        <button type='submit'>
           Login
         </button>
 
