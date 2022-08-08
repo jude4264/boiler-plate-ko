@@ -1,8 +1,14 @@
-import React, { useState } from 'react'
-// import axios from 'axios'
-// import { response } from 'express'
 
-function LoginPage() {
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../../../_actions/user_action'
+import { useNavigate } from 'react-router-dom';
+
+
+function LoginPage(props) {
+  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
@@ -16,7 +22,28 @@ function LoginPage() {
 
   }
   const onSubmitHandler = (event) => {
-    setPassword(event.currentTarget.value)
+    event.preventDefault();
+
+    console.log('Email', Email)
+    console.log('Password', Password)
+
+    let body = {
+      email: Email,
+      password: Password
+    }
+
+    dispatch(loginUser(body))
+    .then(response=>{
+      console.log(response)
+      if(response.payload.loginSucces){
+        // props.history.push('/')
+        navigate('/')
+      }else{
+        alert('Error')
+      }
+    })
+
+
 
   }
 
